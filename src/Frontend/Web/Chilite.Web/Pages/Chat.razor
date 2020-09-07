@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Chilite.Protos
+@using Grpc.Core
+@using System.Threading
+
+@inject Greeter.GreeterClient GreeterClient
+@inject NavigationManager NavigationManager
+
+
+<div style="height: 50vh; overflow-y: auto">
+
+
+    @foreach (var message in _messages)
+    {
+        <h2>@message</h2>
+    }
+
+
+</div>
+
+@code
+{
+
+    private List<string> _messages = new List<string>();
+    private AsyncServerStreamingCall<HelloReply> _serverStream;
+
+    CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
+    CancellationToken token;
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+
+        token = cancelTokenSource.Token;
+
+        _serverStream = GreeterClient.JoinChat(new HelloRequest(), cancellationToken: token);
+        var stream = _serverStream.ResponseStream;
+
+        try
+        {
+            await foreach (var message in stream.ReadAllAsync())
+            {
+                _messages.Add(message.Message);
+                this.StateHasChanged();
+            }
+        }
+        catch (Exception e)
+        {
+            _messages.Add(e.Message);
+        }
+    }
+
+    private void NavigationManagerOnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        Dispose();
+    }
+
+    public void Dispose()
+    {
+        cancelTokenSource.Cancel();
+    }
+}
