@@ -21,24 +21,21 @@
 @code
 {
 
-    private List<string> _messages = new List<string>();
-    private AsyncServerStreamingCall<HelloReply> _serverStream;
+    private readonly List<string> _messages = new List<string>();
 
-    CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
-    CancellationToken token;
+
+    private readonly CancellationTokenSource _cancelTokenSource = new CancellationTokenSource();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
 
-        token = cancelTokenSource.Token;
-
-        _serverStream = GreeterClient.JoinChat(new HelloRequest(), cancellationToken: token);
-        var stream = _serverStream.ResponseStream;
+        var serverStream = GreeterClient.JoinChat(new HelloRequest(), cancellationToken: _cancelTokenSource.Token);
+        var stream = serverStream.ResponseStream;
 
         try
         {
-            await foreach (var message in stream.ReadAllAsync())
+            await foreach (var message in stream.ReadAllAsync(_cancelTokenSource.Token))
             {
                 _messages.Add(message.Message);
                 this.StateHasChanged();
@@ -46,7 +43,11 @@
         }
         catch (Exception e)
         {
-            _messages.Add(e.Message);
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            serverStream.Dispose();
         }
     }
 
@@ -57,6 +58,6 @@
 
     public void Dispose()
     {
-        cancelTokenSource.Cancel();
+        _cancelTokenSource.Cancel();
     }
 }
