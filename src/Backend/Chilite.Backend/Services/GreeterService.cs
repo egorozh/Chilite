@@ -52,7 +52,7 @@ namespace Chilite.Backend
 
                 await Task.Delay(2000, context.CancellationToken);
             }
-          
+
         }
     }
 }

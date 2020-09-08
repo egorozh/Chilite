@@ -6,14 +6,20 @@
 @inject Greeter.GreeterClient GreeterClient
 @inject NavigationManager NavigationManager
 
+<div style="height: 80vh; width: 50vw;">
 
-<div style="height: 50vh; overflow-y: auto">
+    <div style="display: grid; grid-template-rows: 1fr auto; height: 100%">
+       
+        <div style="grid-row: 1; overflow-y: auto; align-self: end;max-height: 100%">
+            <ChatMessagesView Messages="_messages"/>
+        </div>
 
+        <div style="grid-row: 2">
+            <RadzenTextArea Placeholder="Enter here..." Style="margin-bottom: 20px; width: 100%"/>
+            <RadzenButton>Отправить</RadzenButton>
+        </div>
 
-    @foreach (var message in _messages)
-    {
-        <h2>@message</h2>
-    }
+    </div>
 
 
 </div>
