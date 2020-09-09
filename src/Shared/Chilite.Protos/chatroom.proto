@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Chilite.Protos";
+
+package chat;
+
+service ChatRoom{
+
+	rpc JoinChat (ChatRequest) returns (stream ChatMessage);
+	rpc Send(ChatMessage) returns (ChatRequest);
+}
+
+message ChatRequest{
+
+}
+
+message ChatMessage{
+	string message = 1;
+}

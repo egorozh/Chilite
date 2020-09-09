@@ -3,20 +3,22 @@
 @using Grpc.Core
 @using System.Threading
 
-@inject Greeter.GreeterClient GreeterClient
+@inject ChatRoom.ChatRoomClient ChatRoomClient
 @inject NavigationManager NavigationManager
 
 <div style="height: 80vh; width: 50vw;">
 
     <div style="display: grid; grid-template-rows: 1fr auto; height: 100%">
-       
-        <div style="grid-row: 1; overflow-y: auto; align-self: end;max-height: 100%">
+
+        <div style="grid-row: 1; overflow-y: auto; align-self: end; max-height: 100%">
             <ChatMessagesView Messages="_messages"/>
         </div>
 
         <div style="grid-row: 2">
-            <RadzenTextArea Placeholder="Enter here..." Style="margin-bottom: 20px; width: 100%"/>
-            <RadzenButton>Отправить</RadzenButton>
+            <RadzenTextArea Placeholder="Enter here..."
+                            @bind-Value="_message"
+                            Style="margin-bottom: 20px; width: 100%"/>
+            <RadzenButton Click="SendMessageAsync">Отправить</RadzenButton>
         </div>
 
     </div>
@@ -26,9 +28,9 @@
 
 @code
 {
-
     private readonly List<string> _messages = new List<string>();
 
+    private string _message;
 
     private readonly CancellationTokenSource _cancelTokenSource = new CancellationTokenSource();
 
@@ -36,7 +38,7 @@
     {
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
 
-        var serverStream = GreeterClient.JoinChat(new HelloRequest(), cancellationToken: _cancelTokenSource.Token);
+        var serverStream = ChatRoomClient.JoinChat(new ChatRequest(), cancellationToken: _cancelTokenSource.Token);
         var stream = serverStream.ResponseStream;
 
         try
@@ -65,5 +67,18 @@
     public void Dispose()
     {
         _cancelTokenSource.Cancel();
+    }
+
+    private async Task SendMessageAsync()
+    {
+        if (string.IsNullOrEmpty(_message))
+            return;
+
+        await ChatRoomClient.SendAsync(new ChatMessage
+        {
+            Message = _message
+        });
+
+        _message = "";
     }
 }

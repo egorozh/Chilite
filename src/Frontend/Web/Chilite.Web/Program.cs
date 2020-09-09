@@ -29,7 +29,7 @@ namespace Chilite.Web
                     {
                         HttpHandler = new GrpcWebHandler(new HttpClientHandler())
                     });
-                return new Greeter.GreeterClient(chanel);
+                return new ChatRoom.ChatRoomClient(chanel); 
             });
 
 

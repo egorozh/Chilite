@@ -8,11 +8,13 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.31.0" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="2.31.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Frontend\Web\Chilite.Web\Chilite.Web.csproj" />
     <ProjectReference Include="..\..\Shared\Chilite.Protos\Chilite.Protos.csproj" />
+    <ProjectReference Include="..\Chilite.Database\Chilite.Database.csproj" />
   </ItemGroup>
 
 </Project>
