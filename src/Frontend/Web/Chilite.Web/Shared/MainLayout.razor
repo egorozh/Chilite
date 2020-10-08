@@ -1,7 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
-<div style="display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: 1fr auto 1fr; width: 100vw;height:100vh">
-    <div style="grid-column: 2;grid-row: 2">
+<Grid RowDefinitions="* auto *"
+      ColumnDefinitions="* auto *"
+      Width="100vw"
+      Height="100vh"
+      style="background: aqua">
+    
+    <GridChild Column="2"
+               Row="2">
         @Body
-    </div>
-</div>
+    </GridChild>
+</Grid>

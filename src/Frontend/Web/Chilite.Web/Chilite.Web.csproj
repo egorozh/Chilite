@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Chilite.Protos\Chilite.Protos.csproj" />
+    <ProjectReference Include="..\Components\Egorozh.Blazor.CssGrid\Egorozh.Blazor.CssGrid.csproj" />
   </ItemGroup>
 
 </Project>

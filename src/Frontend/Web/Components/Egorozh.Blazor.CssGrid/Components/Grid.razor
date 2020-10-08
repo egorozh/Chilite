@@ -1,0 +1,60 @@
+﻿<div @attributes="@InputAttributes">
+    @ChildContent
+</div>
+
+@code {
+
+    #region Public Properties
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string RowDefinitions { get; set; } = "*";
+
+    [Parameter]
+    public string ColumnDefinitions { get; set; }= "*";
+
+    [Parameter]
+    public string Width { get; set; } = "100%";
+
+    [Parameter]
+    public string Height { get; set; } = "100%";
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; }
+
+    #endregion
+
+    #region Protected Methods
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var style = "";
+
+        if (InputAttributes != null)
+        {
+            if (InputAttributes.ContainsKey("style"))
+                style = (string) InputAttributes["style"];
+        }
+        else
+        {
+            InputAttributes = new Dictionary<string, object>();
+        }
+
+        if (!style.EndsWith(";"))
+            style += ";";
+
+        style += "display:grid;";
+
+        GridStyleGenerator.GenerateStyle(ref style, ColumnDefinitions, RowDefinitions, Width, Height);
+
+        if (InputAttributes.ContainsKey("style"))
+            InputAttributes["style"] = style;
+        else
+            InputAttributes.Add("style", style);
+    }
+
+    #endregion
+
+}
