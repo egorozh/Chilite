@@ -1,0 +1,43 @@
+﻿@using System.Globalization
+@using Blazored.LocalStorage
+
+@inject ILocalStorageService Storage
+@inject NavigationManager Navigation
+
+<RadzenDropDown TValue="CultureInfo"
+                Data="@_supportedCultures.Select(c => new {Value = c, Text = c.NativeName})"
+                TextProperty="Text"
+                ValueProperty="Value"
+                @bind-Value="@_currentCulture"
+                Change="CultureChanged">
+
+</RadzenDropDown>
+
+@code {
+
+    #region Private Fields
+
+    private readonly CultureInfo[] _supportedCultures = new[]
+    {
+        new CultureInfo("ru-Ru"),
+        new CultureInfo("en-Us"),
+    };
+
+    private CultureInfo _currentCulture = CultureInfo.CurrentCulture;
+
+    #endregion
+    
+    #region Private Methods
+
+    private async Task CultureChanged(object param)
+    {
+        if (param is CultureInfo newCulture)
+        {
+            await Storage.SetItemAsync("lang_culture", newCulture.Name);
+            Navigation.NavigateTo(Navigation.Uri, true);
+        }
+    }
+
+    #endregion
+
+}

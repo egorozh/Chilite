@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Database", "Backend
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{2EB2AEE0-C739-4686-8D2E-410E67497C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Egorozh.Blazor.CssGrid", "Frontend\Web\Components\Egorozh.Blazor.CssGrid\Egorozh.Blazor.CssGrid.csproj", "{74C0ECC5-91F4-4E1D-A850-B4C56E2B4D9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Egorozh.Blazor.CssGrid", "Frontend\Web\Components\Egorozh.Blazor.CssGrid\Egorozh.Blazor.CssGrid.csproj", "{74C0ECC5-91F4-4E1D-A850-B4C56E2B4D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

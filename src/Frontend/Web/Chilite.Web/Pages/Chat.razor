@@ -3,8 +3,11 @@
 @using Grpc.Core
 @using System.Threading
 
+
 @inject ChatRoom.ChatRoomClient ChatRoomClient
 @inject NavigationManager NavigationManager
+
+@inject IStringLocalizer<Chat> ChatLoc
 
 <div style="height: 80vh; width: 50vw;">
 
@@ -17,10 +20,11 @@
         </GridChild>
 
         <GridChild Row="2">
-            <RadzenTextArea Placeholder="Enter here..."
+            <RadzenTextArea Placeholder="@ChatLoc["TextAreaPlaceholder"]"
                             @bind-Value="_message"
                             Style="margin-bottom: 20px; width: 100%"/>
-            <RadzenButton Click="SendMessageAsync">Отправить</RadzenButton>
+            <RadzenButton Click="SendMessageAsync"
+                          Text="@ChatLoc["SendButtonText"]"/>
         </GridChild>
 
 
