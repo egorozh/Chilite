@@ -42,7 +42,6 @@ namespace Chilite.Backend
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb();
                 endpoints.MapGrpcService<ChatRoomService>().EnableGrpcWeb();
 
                 endpoints.MapFallbackToFile("index.html");
