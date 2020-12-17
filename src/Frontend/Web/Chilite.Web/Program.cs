@@ -10,6 +10,7 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Chilite.Web
 {
@@ -35,15 +36,20 @@ namespace Chilite.Web
                 return new ChatRoom.ChatRoomClient(chanel);
             });
 
+            builder.Services.AddScoped<AuthenticationStateProvider, IdentityAuthenticationStateProvider>();
+
             builder.Services.AddBlazoredLocalStorage();
 
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthorizeApi>();
+            
             builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-            var defaultCultrure = new CultureInfo("ru-Ru");
-
+            
             var host = builder.Build();
 
             var culture = await host.Services.GetService<ILocalStorageService>().GetItemAsStringAsync("lang_culture");
+
+            var defaultCultrure = new CultureInfo("ru-Ru");
 
             if (culture != null) 
                 defaultCultrure = new CultureInfo(culture);

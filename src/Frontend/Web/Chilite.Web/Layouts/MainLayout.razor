@@ -1,18 +1,40 @@
 ﻿@inherits LayoutComponentBase
 
-<Grid RowDefinitions="* auto *"
-      ColumnDefinitions="* auto *"
-      Width="100vw"
-      Height="100vh"
-      style="background: aqua">
-    
-    <GridChild Row="1"
-               Column="3">
-        <CultureSelector/>
-    </GridChild>
+@inject NavigationManager Nav
 
-    <GridChild Column="2"
-               Row="2">
-        @Body
-    </GridChild>
-</Grid>
+<AuthorizeView>
+    <Grid RowDefinitions="* auto *"
+          ColumnDefinitions="* auto *"
+          Width="100vw"
+          Height="100vh"
+          style="background: aqua">
+
+        <GridChild Row="1"
+                   Column="3">
+            <CultureSelector/>
+        </GridChild>
+
+        <GridChild Column="2"
+                   Row="2">
+            @Body
+        </GridChild>
+    </Grid>
+</AuthorizeView>
+
+@code
+{
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationState { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var state = await AuthenticationState;
+
+        if (!state.User.Identity.IsAuthenticated)
+        {
+            Nav.NavigateTo("login");
+        }
+    }
+
+}
