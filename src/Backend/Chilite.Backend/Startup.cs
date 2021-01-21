@@ -1,10 +1,10 @@
-﻿using System;
-using Chilite.Database;
+﻿using Chilite.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Chilite.Backend
 {
@@ -17,7 +17,7 @@ namespace Chilite.Backend
             services.AddGrpc();
 
             services.AddDbContext<ChatDbContext>(options => options
-                .UseSqlite("Data Source=chat.db"), ServiceLifetime.Singleton);
+                .UseSqlite("Data Source=chat.db"));
 
             services.AddSingleton<ChatRoomManager>();
         }
@@ -28,6 +28,7 @@ namespace Chilite.Backend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();
             }
 
             app.UseHttpsRedirection();
