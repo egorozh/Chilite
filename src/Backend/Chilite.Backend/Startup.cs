@@ -47,7 +47,7 @@ namespace Chilite.Backend
                 endpoints.MapFallbackToFile("index.html");
             });
 
-            serviceProvider.GetService<ChatDbContext>().Database.EnsureCreated();
+            serviceProvider.GetService<ChatDbContext>()?.Database.EnsureCreated();
         }
     }
 }
