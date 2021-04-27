@@ -1,18 +1,22 @@
-using System.Collections.Generic;
+using Blazored.LocalStorage;
+using Chilite.Protos;
+using Microsoft.AspNetCore.Components.Authorization;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Chilite.Web
 {
     public class IdentityAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly ILocalStorageService _localStorage;
+        private readonly Task<Account.AccountClient> _accountClient;
 
-        public IdentityAuthenticationStateProvider(ILocalStorageService localStorage)
+        public IdentityAuthenticationStateProvider(ILocalStorageService localStorage,
+            Task<Account.AccountClient> accountClient)
         {
             _localStorage = localStorage;
+            _accountClient = accountClient;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -21,28 +25,26 @@ namespace Chilite.Web
 
             if (!string.IsNullOrEmpty(token))
             {
-                var authUser = new ClaimsPrincipal(new ClaimsIdentity(
-                    new List<Claim>()
-                    {
-                        new Claim(ClaimTypes.Name, "admin")
-                    }, "jwt"));
+                try
+                {
+                    var authUser =
+                        await (await _accountClient).GetUserProfileAsync(new UserInfoRequest());
 
-
-                return new AuthenticationState(authUser);
+                    if (authUser.ResultCase == UserInfoResponse.ResultOneofCase.Profile)
+                        return Jwt.GetStateFromJwt(token);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
-            
+
             return new(new ClaimsPrincipal(new ClaimsIdentity()));
         }
 
         public void MarkUserAsAuthenticated(string token)
         {
-            var authUser = new ClaimsPrincipal(new ClaimsIdentity(
-                new List<Claim>()
-                {
-                    new Claim(ClaimTypes.Name, "admin")
-                }, "jwt"));
-
-            var authState = Task.FromResult(new AuthenticationState(authUser));
+            var authState = Task.FromResult(Jwt.GetStateFromJwt(token));
 
             NotifyAuthenticationStateChanged(authState);
         }

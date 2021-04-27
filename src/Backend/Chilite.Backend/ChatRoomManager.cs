@@ -6,7 +6,7 @@ namespace Chilite.Backend
 {
     public class ChatRoomManager
     {
-        public event Action<string> MessageSended;
+        public event Action<string>? MessageSended;
 
         public async Task AddMessageAsync(ChatMessage chatMessage)
         {

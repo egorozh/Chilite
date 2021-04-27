@@ -2,12 +2,15 @@
 @using Chilite.Protos
 @using Grpc.Core
 @using System.Threading
+@using Blazored.LocalStorage
 
-
-@inject ChatRoom.ChatRoomClient ChatRoomClient
 @inject NavigationManager NavigationManager
 
 @inject IStringLocalizer<Chat> ChatLoc
+
+@inject ILocalStorageService _storage;
+
+@inject Task<ChatRoom.ChatRoomClient> _chatRoomClient;
 
 <div style="height: 80vh; width: 50vw;">
 
@@ -16,7 +19,10 @@
         <GridChild Row="1"
                    VerticalAlignment="VerticalAlignment.Bottom"
                    style="overflow-y: auto; max-height: 100%">
-            <ChatMessagesView Messages="_messages"/>
+            @foreach (var message in _messages)
+            {
+                <h2>@message</h2>
+            }
         </GridChild>
 
         <GridChild Row="2">
@@ -35,17 +41,17 @@
 
 @code
 {
-    private readonly List<string> _messages = new List<string>();
-
+    private readonly List<string> _messages = new ();
+    
     private string _message;
 
-    private readonly CancellationTokenSource _cancelTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cancelTokenSource = new ();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
-
-        var serverStream = ChatRoomClient.JoinChat(new ChatRequest(), cancellationToken: _cancelTokenSource.Token);
+        
+        var serverStream = (await _chatRoomClient).JoinChat(new ChatRequest(), cancellationToken: _cancelTokenSource.Token);
         var stream = serverStream.ResponseStream;
 
         try
@@ -81,7 +87,7 @@
         if (string.IsNullOrEmpty(_message))
             return;
 
-        await ChatRoomClient.SendAsync(new ChatMessage
+        await  (await _chatRoomClient).SendAsync(new ChatMessage
         {
             Message = _message
         });

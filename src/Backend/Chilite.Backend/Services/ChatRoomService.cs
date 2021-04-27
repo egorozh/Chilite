@@ -1,18 +1,22 @@
-﻿using Chilite.Protos;
+﻿using Chilite.Database;
+using Chilite.Protos;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Chilite.Database;
+using Microsoft.AspNetCore.Identity;
 using ChatMessage = Chilite.Protos.ChatMessage;
 
 namespace Chilite.Backend
 {
+    [Authorize]
     public class ChatRoomService : ChatRoom.ChatRoomBase
     {
         #region Private Fields
 
         private readonly ChatRoomManager _chatRoomManager;
         private readonly ChatDbContext _chatDbContext;
+        private readonly UserManager<ChatUser> _userManager;
 
         private readonly List<IServerStreamWriter<ChatMessage>> _listeners = new();
 
@@ -20,10 +24,11 @@ namespace Chilite.Backend
 
         #region Constructor
 
-        public ChatRoomService(ChatRoomManager chatRoomManager, ChatDbContext chatDbContext)
+        public ChatRoomService(ChatRoomManager chatRoomManager, ChatDbContext chatDbContext ,UserManager<ChatUser> userManager)
         {
             _chatRoomManager = chatRoomManager;
             _chatDbContext = chatDbContext;
+            _userManager = userManager;
 
             _chatRoomManager.MessageSended += ChatRoomService_MessageSended;
         }
@@ -41,20 +46,20 @@ namespace Chilite.Backend
             }
 
             _listeners.Add(responseStream);
-
-            while (!context.CancellationToken.IsCancellationRequested)
-            {
-                await Task.Delay(100);
-            }
-
+            
+            await Task.Delay(int.MaxValue ,context.CancellationToken);
+            
             _listeners.Remove(responseStream);
         }
 
         public override async Task<ChatRequest> Send(ChatMessage request, ServerCallContext context)
         {
+            var user = await _userManager.GetUserAsync(context.GetHttpContext().User);
+
             var chatMessage = new Chilite.Database.ChatMessage
             {
-                Message = request.Message
+                Message = request.Message,
+                User = user
             };
 
             await _chatRoomManager.AddMessageAsync(chatMessage);

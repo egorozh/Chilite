@@ -1,0 +1,52 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Chilite.Protos";
+
+package chat;
+
+service Account{
+		
+	rpc Login(LoginRequest) returns (LoginResponse);
+	rpc Register(RegisterRequest) returns (LoginResponse);
+		
+	rpc GetUserProfile(UserInfoRequest)returns(UserInfoResponse);
+}	
+
+message UserProfileInfo{
+	string username=1;
+}
+	
+message UserInfoRequest{	
+}
+
+message LoginInfo {
+	string token = 1;
+}
+
+message Error {
+	string message = 1;
+}
+message LoginRequest{
+	string login = 1;
+	string password = 2;
+}
+
+message RegisterRequest{
+	string login = 1;
+	string password = 2;
+}
+
+message LoginResponse {
+	oneof result {
+		Error error = 1;
+		LoginInfo login = 2;
+	}
+}
+
+message UserInfoResponse{
+	oneof result {
+		Error error = 1;
+		UserProfileInfo profile = 2;
+	}	
+}
+

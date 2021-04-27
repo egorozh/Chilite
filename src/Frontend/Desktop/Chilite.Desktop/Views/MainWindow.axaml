@@ -1,17 +1,18 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:Chilite.Desktop.ViewModels;assembly=Chilite.Desktop"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Chilite.Desktop.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Chilite.Desktop">
+        Title="Chilite">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+    <Grid RowDefinitions="Auto *">
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Command="{Binding ConnectCommand}">Connect</Button>
+        <TextBlock Grid.Row="1"
+                   TextWrapping="Wrap"
+                   Text="{Binding Messages}" />
+    </Grid>
 
 </Window>

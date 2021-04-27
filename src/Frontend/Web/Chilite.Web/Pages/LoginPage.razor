@@ -2,10 +2,11 @@
 
 @layout LoginLayout
 
-@inject AuthorizeApi AuthorizeApi
-@inject NavigationManager NavManager
+@inject AuthorizeApi _authorizeApi
+@inject NavigationManager _navManager
 
-<RadzenLogin Login="@OnLogin"/>
+<RadzenLogin Login="@OnLogin"
+             Register="@OnRegister"/>
 
 @code {
 
@@ -14,10 +15,12 @@
         var login = arg.Username;
         var password = arg.Password;
 
-        var success = await AuthorizeApi.Login(login, password);
+        var success = await _authorizeApi.Login(login, password);
 
         if (success)
-            NavManager.NavigateTo("/");
+            _navManager.NavigateTo("/");
     }
+
+    private void OnRegister() => _navManager.NavigateTo("/register");
 
 }
