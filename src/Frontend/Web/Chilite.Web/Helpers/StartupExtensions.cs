@@ -42,9 +42,9 @@ namespace Chilite.Web
                 if (culture != null)
                     defaultCultrure = new CultureInfo(culture);
             }
-
-            CultureInfo.CurrentCulture = defaultCultrure;
-            CultureInfo.CurrentUICulture = defaultCultrure;
+            
+            CultureInfo.DefaultThreadCurrentCulture = defaultCultrure;
+            CultureInfo.DefaultThreadCurrentUICulture = defaultCultrure;
         }
 
         public static void AddAuthGrpcClient<T>(this IServiceCollection services) where T : ClientBase

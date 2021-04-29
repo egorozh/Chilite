@@ -39,7 +39,7 @@ namespace Chilite.Web
                 }
             }
 
-            return new(new ClaimsPrincipal(new ClaimsIdentity()));
+            return Empty();
         }
 
         public void MarkUserAsAuthenticated(string token)
@@ -48,5 +48,14 @@ namespace Chilite.Web
 
             NotifyAuthenticationStateChanged(authState);
         }
+
+        public async Task MarkLogouted()
+        {
+            await _localStorage.RemoveItemAsync("token");
+            NotifyAuthenticationStateChanged(Task.FromResult(Empty()));
+        }
+
+        private static AuthenticationState Empty()
+            => new(new ClaimsPrincipal(new ClaimsIdentity()));
     }
 }

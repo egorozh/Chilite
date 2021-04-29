@@ -15,14 +15,12 @@ namespace Chilite.Web
             services.AddAuthGrpcClient<Account.AccountClient>();
             services.AddAuthGrpcClient<ChatRoom.ChatRoomClient>();
 
-            services.AddScoped<AuthenticationStateProvider, IdentityAuthenticationStateProvider>();
-
             services.AddBlazoredLocalStorage();
-
-            services.AddAuthorizationCore();
-            services.AddScoped<AuthorizeApi>();
-
             services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddAuthorizationCore();
+
+            services.AddScoped<AuthorizeApi>();
+            services.AddScoped<AuthenticationStateProvider, IdentityAuthenticationStateProvider>();
         }
 
         public async Task Configure(IServiceProvider serviceProvider)

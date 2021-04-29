@@ -1,6 +1,9 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Security.Claims
+@inherits LayoutComponentBase
 
-@inject NavigationManager Nav
+@inject NavigationManager _nav
+@inject IStringLocalizer<MainLayout> _loc
+@inject AuthenticationStateProvider _authenticationStateProvider
 
 <AuthorizeView>
     <Grid RowDefinitions="* auto *"
@@ -9,8 +12,21 @@
           Height="100vh">
 
         <GridChild Row="1"
-                   Column="3">
+                   Column="1">
             <CultureSelector/>
+        </GridChild>
+
+        <GridChild Row="1"
+                   Column="2">
+            <div>
+                Hello @_user?.Identity?.Name
+            </div>
+        </GridChild>
+
+        <GridChild Row="1"
+                   Column="3">
+            <RadzenButton Text="@_loc["Logout"]"
+                          Click="OnLogout"/>
         </GridChild>
 
         <GridChild Column="2"
@@ -22,18 +38,28 @@
 
 @code
 {
+    private ClaimsPrincipal? _user;
 
     [CascadingParameter]
-    public Task<AuthenticationState> AuthenticationState { get; set; }
+    public Task<AuthenticationState>? AuthenticationState { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        var state = await AuthenticationState;
-
-        if (!state.User.Identity.IsAuthenticated)
+        if (AuthenticationState != null)
         {
-            Nav.NavigateTo("login");
+            var state = await AuthenticationState;
+
+            _user = state.User;
+
+            if (_user.Identity is {IsAuthenticated: false })
+            {
+                _nav.NavigateTo("login");
+            }
         }
     }
 
+    private async Task OnLogout()
+    {
+        await ((IdentityAuthenticationStateProvider) _authenticationStateProvider).MarkLogouted();
+    }
 }

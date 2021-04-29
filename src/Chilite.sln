@@ -21,11 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Protos", "Shared\Ch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Desktop", "Frontend\Desktop\Chilite.Desktop\Chilite.Desktop.csproj", "{18FCEF61-D36A-4F33-AD94-DB953448D9DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilite.Mobile.Android", "Frontend\Mobile\Chilite.Mobile\Chilite.Mobile.Android\Chilite.Mobile.Android.csproj", "{4BF645BE-B392-4B8F-A983-4AAC8ABD7E5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilite.Mobile.Android", "Frontend\Mobile\Chilite.Mobile.Android\Chilite.Mobile.Android.csproj", "{4BF645BE-B392-4B8F-A983-4AAC8ABD7E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilite.Mobile.iOS", "Frontend\Mobile\Chilite.Mobile\Chilite.Mobile.iOS\Chilite.Mobile.iOS.csproj", "{0CD10EFD-9E21-4B5A-A629-50F07F55B0F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilite.Mobile.iOS", "Frontend\Mobile\Chilite.Mobile.iOS\Chilite.Mobile.iOS.csproj", "{0CD10EFD-9E21-4B5A-A629-50F07F55B0F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Mobile", "Frontend\Mobile\Chilite.Mobile\Chilite.Mobile\Chilite.Mobile.csproj", "{8F1E73AB-D8C4-4D73-A117-95C2EB9D41B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Mobile", "Frontend\Mobile\Chilite.Mobile\Chilite.Mobile.csproj", "{8F1E73AB-D8C4-4D73-A117-95C2EB9D41B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Web", "Frontend\Web\Chilite.Web\Chilite.Web.csproj", "{3E884BCC-ECDC-4CD9-BE9C-7FC8D7ABEB28}"
 EndProject
