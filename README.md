@@ -1,5 +1,5 @@
 # Сhilite
-Chat on c# stack:
+Chat on c# stack
 ### Backend:
 * Asp.Net.Core + gRPC
 * Entity Framework
