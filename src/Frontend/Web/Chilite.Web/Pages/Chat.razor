@@ -10,7 +10,7 @@
 
 @inject ILocalStorageService _storage;
 
-@inject Task<ChatRoom.ChatRoomClient> _chatRoomClient;
+@inject ChatRoom.ChatRoomClient _chatRoomClient;
 
 <div style="height: 80vh; width: 50vw;">
 
@@ -51,7 +51,7 @@
     {
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
         
-        var serverStream = (await _chatRoomClient).JoinChat(new ChatRequest(), cancellationToken: _cancelTokenSource.Token);
+        var serverStream = _chatRoomClient.JoinChat(new ChatRequest(), cancellationToken: _cancelTokenSource.Token);
         var stream = serverStream.ResponseStream;
 
         try
@@ -87,7 +87,7 @@
         if (string.IsNullOrEmpty(_message))
             return;
 
-        await  (await _chatRoomClient).SendAsync(new ChatMessage
+        await   _chatRoomClient.SendAsync(new ChatMessage
         {
             Message = _message
         });

@@ -1,6 +1,5 @@
 ﻿using Blazored.LocalStorage;
 using Grpc.Core;
-using Grpc.Net.Client;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,29 +41,30 @@ namespace Chilite.Web
                 if (culture != null)
                     defaultCultrure = new CultureInfo(culture);
             }
-            
+
             CultureInfo.DefaultThreadCurrentCulture = defaultCultrure;
             CultureInfo.DefaultThreadCurrentUICulture = defaultCultrure;
         }
 
         public static void AddAuthGrpcClient<T>(this IServiceCollection services) where T : ClientBase
         {
-            services.AddScoped(async provider =>
+            services.AddScoped(provider =>
             {
-                var client = (T) Activator.CreateInstance(typeof(T), await GetChannel(provider));
+                var nav = provider.GetService<NavigationManager>();
+                var storage = provider.GetService<ISyncLocalStorageService>();
 
-                return client;
+                if (nav != null && storage != null)
+                {
+                    string token = storage.GetItemAsString("token");
+
+                    var client = (T?) Activator.CreateInstance(typeof(T), nav.GetAuthChannel(token));
+
+                    if (client != null) 
+                        return client;
+                }
+
+                return Activator.CreateInstance<T>();
             });
-        }
-
-        private static async Task<GrpcChannel> GetChannel(IServiceProvider provider)
-        {
-            var nav = provider.GetService<NavigationManager>();
-            var storage = provider.GetService<ILocalStorageService>();
-
-            string token = await storage.GetItemAsStringAsync("token");
-
-            return nav.GetAuthChannel(token);
         }
     }
 }

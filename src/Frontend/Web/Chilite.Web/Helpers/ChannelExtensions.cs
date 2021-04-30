@@ -9,12 +9,6 @@ namespace Chilite.Web
 {
     internal static class ChannelExtensions
     {
-        public static GrpcChannel GetAnonChannel(this NavigationManager navigation) =>
-            GrpcChannel.ForAddress(navigation.BaseUri, new GrpcChannelOptions
-            {
-                HttpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()))
-            });
-        
         public static GrpcChannel GetAuthChannel(this NavigationManager navigation, string token) =>
             GrpcChannel.ForAddress(navigation.BaseUri,
                 new GrpcChannelOptions

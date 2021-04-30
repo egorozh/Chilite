@@ -54,8 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1-preview2" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

@@ -2,9 +2,9 @@
 using Chilite.Protos;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using ChatMessage = Chilite.Protos.ChatMessage;
 
 namespace Chilite.Backend

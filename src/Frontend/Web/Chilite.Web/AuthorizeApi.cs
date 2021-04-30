@@ -9,11 +9,11 @@ namespace Chilite.Web
     public class AuthorizeApi
     {
         private readonly ILocalStorageService _localStorage;
-        private readonly Task<Account.AccountClient> _accountClient;
+        private readonly Account.AccountClient _accountClient;
         private readonly IdentityAuthenticationStateProvider _authenticationStateProvider;
 
         public AuthorizeApi(AuthenticationStateProvider authenticationStateProvider,
-            ILocalStorageService localStorage, Task<Account.AccountClient> accountClient)
+            ILocalStorageService localStorage, Account.AccountClient accountClient)
         {
             _localStorage = localStorage;
             _accountClient = accountClient;
@@ -24,7 +24,7 @@ namespace Chilite.Web
         {
             try
             {
-                var tokenResponse = await (await _accountClient).LoginAsync(new LoginRequest()
+                var tokenResponse = await _accountClient.LoginAsync(new LoginRequest()
                 {
                     Login = login,
                     Password = password
@@ -52,7 +52,7 @@ namespace Chilite.Web
         {
             try
             {
-                var tokenResponse = await (await _accountClient).RegisterAsync(new RegisterRequest
+                var tokenResponse = await _accountClient.RegisterAsync(new RegisterRequest
                 {
                     Login = username,
                     Password = password
