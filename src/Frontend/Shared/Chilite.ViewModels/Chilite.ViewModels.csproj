@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Chilite.Protos\Chilite.Protos.csproj" />
+    <ProjectReference Include="..\Chilite.FrontendCore\Chilite.FrontendCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Chilite.FrontendCore;
 
 namespace Chilite.ViewModels
 {
@@ -16,7 +17,7 @@ namespace Chilite.ViewModels
         public ObservableCollection<string> Messages { get; } = new();
 
         public string MessageText { get; set; }
-            
+
         public ICommand SendCommand { get; }
 
         public ChatViewModel(string token)
@@ -61,31 +62,11 @@ namespace Chilite.ViewModels
                 serverStream.Dispose();
             }
         }
-        
+
         private static ChatRoom.ChatRoomClient GetChatRoomClient(string baseUri, string token)
             => new(GetAuthChannel(baseUri, token));
 
         public static GrpcChannel GetAuthChannel(string baseUri, string token) =>
-            GrpcChannel.ForAddress(baseUri,
-                new GrpcChannelOptions
-                {
-                    HttpClient = new HttpClient(),
-                    Credentials = ChannelCredentials.Create(new SslCredentials(),
-                        GetJwtCredentials(token))
-                });
-
-        private static CallCredentials GetJwtCredentials(string token) =>
-            CallCredentials.FromInterceptor((_, metadata) =>
-            {
-                AddJwt(metadata, token);
-
-                return Task.CompletedTask;
-            });
-
-        private static void AddJwt(Metadata metadata, string token)
-        {
-            if (!string.IsNullOrEmpty(token))
-                metadata.Add("Authorization", $"Bearer {token}");
-        }
+            new HttpClient().ToAuthChannel(baseUri, token);
     }
 }

@@ -65,7 +65,7 @@ namespace Chilite.ViewModels
 
         private static Account.AccountClient GetAccountClient(string baseUri)
         {
-            GrpcChannel channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
+            var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
             {
                 HttpHandler = new HttpClientHandler()
             });
