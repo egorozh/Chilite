@@ -8,31 +8,40 @@
           Margin="10">
 
         <Grid>
-            <ListBox Items="{Binding Messages}"
-                     Background="Transparent"
-                     VirtualizationMode="Simple">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border Padding="10">
-                            <TextBlock Text="{Binding}"
-                                       TextWrapping="Wrap" />
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl Items="{Binding Messages}"
+                              Background="Transparent">
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10">
+                                <TextBlock Text="{Binding}"
+                                           TextWrapping="WrapWithOverflow" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+          </Grid>
 
         <Grid Grid.Row="1"
               ColumnDefinitions="* Auto"
               Margin="0 10 0 0">
+
             <TextBox TextWrapping="Wrap"
                      AcceptsReturn="True"
                      AcceptsTab="True"
                      Text="{Binding MessageText}"
-                     Watermark="Text here..." />
+                     Watermark="Введите сообщение..." />
             <Button Grid.Column="1"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    Margin="10 0 0 0"
                     Command="{Binding SendCommand}"
                     Content="Отправить" />
         </Grid>
+
     </Grid>
 </UserControl>

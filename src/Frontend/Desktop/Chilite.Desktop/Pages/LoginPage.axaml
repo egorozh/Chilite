@@ -49,6 +49,7 @@
                 <Button Grid.Row="3" Grid.Column="0"
                         Grid.ColumnSpan="2"
                         HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
                         Content="To Login"
                         Command="{Binding LoginCommand}"
                         Margin="3" />
