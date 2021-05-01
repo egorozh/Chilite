@@ -14,11 +14,9 @@
     <PackageReference Include="Avalonia" Version="0.10.2" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.2" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.2" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.3.3" />
-    <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Chilite.Protos\Chilite.Protos.csproj" />
+    <ProjectReference Include="..\..\Shared\Chilite.ViewModels\Chilite.ViewModels.csproj" />
   </ItemGroup>
 </Project>

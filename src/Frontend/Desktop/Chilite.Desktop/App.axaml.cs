@@ -1,13 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Chilite.Desktop.ViewModels;
-using Chilite.Desktop.Views;
-using PropertyChanged;
+using Chilite.ViewModels;
+using Prism.Events;
 
 namespace Chilite.Desktop
 {
-    [DoNotNotify]
     public class App : Application
     {
         public override void Initialize()
@@ -21,7 +19,7 @@ namespace Chilite.Desktop
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainViewModel(new EventAggregator()),
                 };
             }
 

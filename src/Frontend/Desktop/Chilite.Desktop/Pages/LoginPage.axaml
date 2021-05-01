@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chilite.Desktop.Pages.LoginPage"
+             FontSize="18">
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Margin" Value="0 5" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="* Auto *"
+          ColumnDefinitions="* Auto *">
+
+        <Border Grid.Column="1"
+                Width="350"
+                Grid.Row="1"
+                Background="#5555AA"
+                CornerRadius="10"
+                Padding="10">
+
+            <Grid ColumnDefinitions="Auto *"
+                  RowDefinitions="Auto Auto Auto Auto Auto">
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           FontSize="28"
+                           HorizontalAlignment="Center"
+                           Text="Войдите в чат:" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Логин" />
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding Login}" />
+
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Text="Пароль" />
+                <TextBox Grid.Row="2" Grid.Column="1"
+                         RevealPassword="True"
+                         Text="{Binding Password}" />
+
+                <Button Grid.Row="3" Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Content="To Login"
+                        Command="{Binding LoginCommand}"
+                        Margin="3" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

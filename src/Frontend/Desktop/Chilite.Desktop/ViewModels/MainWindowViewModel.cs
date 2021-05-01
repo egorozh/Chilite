@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chilite.Desktop.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel 
     {
         public string Messages { get; set; }
 

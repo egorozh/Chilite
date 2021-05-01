@@ -1,0 +1,25 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Chilite.ViewModels;assembly=Chilite.ViewModels"
+        xmlns:pages="clr-namespace:Chilite.Desktop.Pages"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Chilite.Desktop.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+
+        MinWidth="380"
+        Title="Chilite">
+
+    <ContentControl Content="{Binding CurrentPage}">
+        <ContentControl.DataTemplates>
+            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <pages:LoginPage />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
+                <pages:ChatPage />
+            </DataTemplate>
+        </ContentControl.DataTemplates>
+    </ContentControl>
+
+</Window>

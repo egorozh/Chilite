@@ -1,13 +1,11 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using PropertyChanged;
 
-namespace Chilite.Desktop.Views
+namespace Chilite.Desktop.Pages
 {
-    [DoNotNotify]
-    public class MainWindow : Window
+    public class ChatPage : UserControl
     {
-        public MainWindow()
+        public ChatPage()
         {
             InitializeComponent();
         }

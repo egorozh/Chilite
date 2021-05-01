@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Web", "Frontend\Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chilite.Database", "Backend\Chilite.Database\Chilite.Database.csproj", "{E655EEDB-B1BB-4AEF-957D-CDCD85554A89}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{24D74B98-C395-409D-83DC-98B9E00157F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilite.ViewModels", "Frontend\Shared\Chilite.ViewModels\Chilite.ViewModels.csproj", "{E15E067A-BAE5-4198-BE43-F17638A98AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +145,18 @@ Global
 		{E655EEDB-B1BB-4AEF-957D-CDCD85554A89}.Release|iPhone.Build.0 = Release|Any CPU
 		{E655EEDB-B1BB-4AEF-957D-CDCD85554A89}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{E655EEDB-B1BB-4AEF-957D-CDCD85554A89}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Release|iPhone.Build.0 = Release|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +173,8 @@ Global
 		{8F1E73AB-D8C4-4D73-A117-95C2EB9D41B0} = {7260475F-48E5-4420-8063-8D9B66D93BE3}
 		{3E884BCC-ECDC-4CD9-BE9C-7FC8D7ABEB28} = {4A3661F8-6DC8-4762-B418-8342320BADEE}
 		{E655EEDB-B1BB-4AEF-957D-CDCD85554A89} = {EA05AB28-CBCA-4251-A0A2-19B28A6FC359}
+		{24D74B98-C395-409D-83DC-98B9E00157F8} = {3DFA3058-61C6-4570-A2A2-D14266483CC5}
+		{E15E067A-BAE5-4198-BE43-F17638A98AE6} = {24D74B98-C395-409D-83DC-98B9E00157F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BC60D758-841E-46BC-BACD-2A42B92C6EC5}
