@@ -3,7 +3,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Chilite.Desktop.Pages.ChatPage"
-             Background="Red">
-  Chat page
+             x:Class="Chilite.Desktop.Pages.ChatPage">
+    <Grid RowDefinitions="* Auto"
+          Margin="10">
+
+        <Grid>
+            <ListBox Items="{Binding Messages}"
+                     Background="Transparent" />
+        </Grid>
+
+        <Grid Grid.Row="1"
+              ColumnDefinitions="* Auto">
+            <TextBox TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     Text="{Binding MessageText}"
+                     Watermark="Text here..." />
+            <Button Grid.Column="1"
+                    Command="{Binding SendCommand}"
+                    Content="Отправить" />
+        </Grid>
+    </Grid>
 </UserControl>

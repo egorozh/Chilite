@@ -46,9 +46,7 @@ namespace Chilite.ViewModels
         {
             if (!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password))
             {
-                const string baseUri = "https://localhost:5001/";
-
-                var acclient = GetAccountClient(baseUri);
+                var acclient = GetAccountClient(MainViewModel.BaseUri);
 
                 var tokenResponse = await acclient.LoginAsync(new LoginRequest()
                 {
@@ -59,13 +57,8 @@ namespace Chilite.ViewModels
                 if (tokenResponse.ResultCase == LoginResponse.ResultOneofCase.Login)
                 {
                     var token = tokenResponse.Login.Token;
-
-                    //Metadata headers = new();
-                    //if (!string.IsNullOrEmpty(token))
-                    //    headers.Add("Authorization", $"Bearer {token}");
-
-                    //var res = await acclient.GetUserProfileAsync(new UserInfoRequest(), headers);
-                    _eventAggregator.GetEvent<LoginEvent>().Publish();
+                    
+                    _eventAggregator.GetEvent<LoginEvent>().Publish(token);
                 }
             }
         }

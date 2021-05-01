@@ -2,7 +2,7 @@
 
 namespace Chilite.ViewModels.Events
 {
-    internal class LoginEvent : PubSubEvent
+    internal class LoginEvent : PubSubEvent<string>
     {
     }
 }

@@ -5,6 +5,8 @@ namespace Chilite.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        public const string BaseUri = "https://localhost:5001/";
+            
         public object CurrentPage { get; set; }
 
         public MainViewModel(IEventAggregator eventAggregator)
@@ -14,9 +16,9 @@ namespace Chilite.ViewModels
             eventAggregator.GetEvent<LoginEvent>().Subscribe(OnLogin);
         }
 
-        private void OnLogin()
+        private void OnLogin(string token)
         {   
-            CurrentPage = new ChatViewModel();
+            CurrentPage = new ChatViewModel(token);
         }
     }
 }

@@ -9,7 +9,13 @@
         Icon="/Assets/avalonia-logo.ico"
 
         MinWidth="380"
-        Title="Chilite">
+        Title="Chilite - Chat"
+
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="False"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="#AA000000"
+        SystemDecorations="Full">
 
     <ContentControl Content="{Binding CurrentPage}">
         <ContentControl.DataTemplates>

@@ -9,10 +9,10 @@
         <Style Selector="TextBlock">
             <Setter Property="TextAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-
+            <Setter Property="Margin" Value="10 " />
         </Style>
         <Style Selector="TextBox">
-            <Setter Property="Margin" Value="0 5" />
+            <Setter Property="Margin" Value="3 5" />
         </Style>
     </UserControl.Styles>
 
@@ -22,8 +22,7 @@
         <Border Grid.Column="1"
                 Width="350"
                 Grid.Row="1"
-                Background="#5555AA"
-                CornerRadius="10"
+                Background="#99333333"
                 Padding="10">
 
             <Grid ColumnDefinitions="Auto *"
@@ -49,10 +48,12 @@
 
                 <Button Grid.Row="3" Grid.Column="0"
                         Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch"
                         Content="To Login"
                         Command="{Binding LoginCommand}"
                         Margin="3" />
             </Grid>
         </Border>
     </Grid>
+
 </UserControl>
