@@ -12,12 +12,13 @@
         Title="Chilite - Chat"
 
         WindowStartupLocation="CenterScreen"
-        ExtendClientAreaToDecorationsHint="False"
+        ExtendClientAreaToDecorationsHint="True"
         TransparencyLevelHint="AcrylicBlur"
         Background="#AA000000"
         SystemDecorations="Full">
 
-    <ContentControl Content="{Binding CurrentPage}">
+    <ContentControl Content="{Binding CurrentPage}"
+                    Margin="0 38 0 0">
         <ContentControl.DataTemplates>
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
                 <pages:LoginPage />

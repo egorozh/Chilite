@@ -9,11 +9,22 @@
 
         <Grid>
             <ListBox Items="{Binding Messages}"
-                     Background="Transparent" />
+                     Background="Transparent"
+                     VirtualizationMode="Simple">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10">
+                            <TextBlock Text="{Binding}"
+                                       TextWrapping="Wrap" />
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
 
         <Grid Grid.Row="1"
-              ColumnDefinitions="* Auto">
+              ColumnDefinitions="* Auto"
+              Margin="0 10 0 0">
             <TextBox TextWrapping="Wrap"
                      AcceptsReturn="True"
                      AcceptsTab="True"
