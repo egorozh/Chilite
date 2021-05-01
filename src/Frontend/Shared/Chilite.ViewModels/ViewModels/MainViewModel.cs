@@ -1,4 +1,5 @@
-﻿using Prism.Events;
+﻿using Chilite.ViewModels.Events;
+using Prism.Events;
 
 namespace Chilite.ViewModels
 {

@@ -44,6 +44,7 @@
                            Text="Пароль" />
                 <TextBox Grid.Row="2" Grid.Column="1"
                          RevealPassword="True"
+                         PasswordChar="*"
                          Text="{Binding Password}" />
 
                 <Button Grid.Row="3" Grid.Column="0"

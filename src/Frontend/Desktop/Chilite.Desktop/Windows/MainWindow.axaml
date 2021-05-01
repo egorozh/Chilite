@@ -5,7 +5,7 @@
         xmlns:viewModels="clr-namespace:Chilite.ViewModels;assembly=Chilite.ViewModels"
         xmlns:pages="clr-namespace:Chilite.Desktop.Pages"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Chilite.Desktop.MainWindow"
+        x:Class="Chilite.Desktop.Windows.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
 
         MinWidth="380"

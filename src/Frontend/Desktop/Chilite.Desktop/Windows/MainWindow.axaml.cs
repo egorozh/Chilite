@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Chilite.Desktop
+namespace Chilite.Desktop.Windows
 {
     public class MainWindow : Window
     {
