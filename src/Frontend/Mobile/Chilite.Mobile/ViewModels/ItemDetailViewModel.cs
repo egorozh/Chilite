@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using Chilite.Mobile.Models;
 using Xamarin.Forms;
 
 namespace Chilite.Mobile.ViewModels

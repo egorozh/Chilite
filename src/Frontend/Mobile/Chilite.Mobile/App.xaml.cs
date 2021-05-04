@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Chilite.Mobile.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Chilite.Mobile.Services;
-using Chilite.Mobile.Views;
 
 namespace Chilite.Mobile
 {
-    public partial class App : Application
+    public partial class App 
     {
+        public const string BaseUri = "https://localhost:5001/";
 
         public App()
         {
