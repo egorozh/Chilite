@@ -55,7 +55,7 @@ namespace Chilite.Web
 
                 if (nav != null && storage != null)
                 {
-                    string token = storage.GetItemAsString("token");
+                    string token = storage.GetItem<string>("token");
 
                     var client = (T?) Activator.CreateInstance(typeof(T), nav.GetAuthChannel(token));
 

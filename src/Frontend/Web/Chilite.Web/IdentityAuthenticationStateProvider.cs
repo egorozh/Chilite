@@ -31,7 +31,7 @@ namespace Chilite.Web
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = await _localStorage.GetItemAsStringAsync("token");
+            var token = await _localStorage.GetItemAsync<string>("token");
 
             return await IsTokenValid(token)
                 ? Jwt.GetStateFromJwt(token)
