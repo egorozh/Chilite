@@ -1,12 +1,17 @@
 ﻿using Chilite.Mobile.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Chilite.Mobile
 {
     public partial class App 
     {
-        public const string BaseUri = "https://localhost:5001/";
+        public static string IPAddress = DeviceInfo.Platform == DevicePlatform.Android
+            ? "10.0.2.2"
+            : "localhost";
 
+        public static string BaseUri = $"https://{IPAddress}:5001";
+        
         public App()
         {
             InitializeComponent();

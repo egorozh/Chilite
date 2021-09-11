@@ -16,12 +16,20 @@ namespace Chilite.FrontendCore
                         GetJwtCredentials(token))
                 });
 
+        public static GrpcChannel ToAuthChannel(this HttpClient httpClient, string baseUri) =>
+            GrpcChannel.ForAddress(baseUri,
+                new GrpcChannelOptions
+                {
+                    HttpClient = httpClient,
+                    Credentials = ChannelCredentials.SecureSsl
+                });
+
         private static CallCredentials GetJwtCredentials(string token) =>
             CallCredentials.FromInterceptor((_, metadata) =>
             {
                 if (!string.IsNullOrEmpty(token))
                     metadata.AddJwt(token);
-
+                
                 return Task.CompletedTask;
             });
 

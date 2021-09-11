@@ -18,4 +18,8 @@
     <Protobuf Include="chatroom.proto" />
   </ItemGroup>
 
+  <PropertyGroup >
+    <DefineConstants>$(DefineConstants);GOOGLE_PROTOBUF_COMPATIBILITY_MODE</DefineConstants>
+  </PropertyGroup>
+
 </Project>

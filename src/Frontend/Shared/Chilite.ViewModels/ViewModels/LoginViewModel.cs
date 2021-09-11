@@ -67,7 +67,7 @@ namespace Chilite.ViewModels
         {
             var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
             {
-                HttpHandler = new HttpClientHandler()
+                HttpHandler = new SocketsHttpHandler()
             });
 
             return new Account.AccountClient(channel);
