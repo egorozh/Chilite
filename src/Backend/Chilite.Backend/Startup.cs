@@ -1,5 +1,7 @@
 ﻿using Chilite.Backend.Auth;
 using Chilite.Database;
+using Chilite.Domain;
+using Chilite.DomainModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +21,7 @@ namespace Chilite.Backend
 
             services.AddDbContext<ChatDbContext>(options => options
                 .UseSqlite("Data Source=chat.db"));
-
+            
             services.AddIdentity<ChatUser, IdentityRole>()
                 .AddEntityFrameworkStores<ChatDbContext>()
                 .AddDefaultTokenProviders();
@@ -57,8 +59,8 @@ namespace Chilite.Backend
             }));
 
             services.AddAuthorization();
-
-            services.AddSingleton<ChatRoomManager>();
+            
+            services.AddSingleton<ChatApp>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
@@ -67,6 +69,12 @@ namespace Chilite.Backend
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();

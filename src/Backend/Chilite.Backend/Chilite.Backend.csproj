@@ -1,27 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-
-    <Nullable>Enable</Nullable>
-
-    <UserSecretsId>629fcf1b-e229-49fb-aa4d-1980a9159036</UserSecretsId>
+	  <UserSecretsId>629fcf1b-e229-49fb-aa4d-1980a9159036</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.39.0" />
-    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.39.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.40.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0-rc.2.21480.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0-rc.2.21480.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-rc.2.21480.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Frontend\Web\Chilite.Web\Chilite.Web.csproj" />
     <ProjectReference Include="..\..\Shared\Chilite.Protos\Chilite.Protos.csproj" />
     <ProjectReference Include="..\Chilite.Database\Chilite.Database.csproj" />
+    <ProjectReference Include="..\Chilite.Domain\Chilite.Domain.csproj" />
   </ItemGroup>
 
 </Project>

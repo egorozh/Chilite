@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.39.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.39.1">
+    <PackageReference Include="Google.Protobuf" Version="3.19.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.40.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.41.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -18,7 +18,7 @@
     <Protobuf Include="chatroom.proto" />
   </ItemGroup>
 
-  <PropertyGroup >
+  <PropertyGroup>
     <DefineConstants>$(DefineConstants);GOOGLE_PROTOBUF_COMPATIBILITY_MODE</DefineConstants>
   </PropertyGroup>
 

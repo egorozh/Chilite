@@ -29,7 +29,7 @@ namespace Chilite.Web
 
         public static async Task UseLocalization(this IServiceProvider serviceProvider)
         {
-            var defaultCultrure = new CultureInfo("ru-Ru");
+            var defaultCultrure = CultureInfo.CreateSpecificCulture("ru-Ru");
 
             var localStorage = serviceProvider.GetService<ILocalStorageService>();
 
@@ -39,7 +39,7 @@ namespace Chilite.Web
                     .GetItemAsStringAsync("lang_culture");
 
                 if (culture != null)
-                    defaultCultrure = new CultureInfo(culture);
+                    defaultCultrure = CultureInfo.CreateSpecificCulture(culture);
             }
 
             CultureInfo.DefaultThreadCurrentCulture = defaultCultrure;
@@ -59,7 +59,7 @@ namespace Chilite.Web
 
                     var client = (T?) Activator.CreateInstance(typeof(T), nav.GetAuthChannel(token));
 
-                    if (client != null) 
+                    if (client != null)
                         return client;
                 }
 

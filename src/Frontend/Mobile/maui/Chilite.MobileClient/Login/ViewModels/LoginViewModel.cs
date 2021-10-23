@@ -1,7 +1,9 @@
 ﻿using System.Net.Http;
 using Chilite.FrontendCore;
 using Chilite.MobileClient.Chat.Views;
+using Chilite.MobileClient.Login.Views;
 using Chilite.Protos;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.Maui.Controls;
@@ -10,6 +12,7 @@ namespace Chilite.MobileClient.Login.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly IAllertService _allertService;
         private string _login;
         private string _password;
 
@@ -31,8 +34,9 @@ namespace Chilite.MobileClient.Login.ViewModels
 
         public Command LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(IAllertService allertService)
         {
+            _allertService = allertService;
             LoginCommand = new Command(OnLoginClicked);
         }
 
@@ -59,33 +63,29 @@ namespace Chilite.MobileClient.Login.ViewModels
                 }
                 catch (Exception e)
                 {
+                    await _allertService.ShowAllert(e.Message);
                 }
             }
         }
-        
-        //private static Account.AccountClient GetAccountClient(string baseUri)
-        //    => new(GetAuthChannel(baseUri));
+
+        private static Account.AccountClient GetAccountClient(string baseUri)
+            => new(GetAuthChannel(baseUri));
 
         public static GrpcChannel GetAuthChannel(string baseUri, string? token = null)
-        {
+        {   
             var httpClientHandler = new SocketsHttpHandler();
+            
+            return GrpcChannel.ForAddress(baseUri,
+                new GrpcChannelOptions
+                {
+                    HttpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, httpClientHandler)),
+                    Credentials = new SslCredentials()
+                });
 
-            //httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
-            //{
-            //    return true;
-            //};
+         
 
-            return new HttpClient(httpClientHandler)
-                .ToAuthChannel(baseUri, token);
-        }
-        private static Account.AccountClient GetAccountClient(string baseUri)
-        {
-            var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
-            {
-                HttpHandler = new SocketsHttpHandler()
-            });
-
-            return new Account.AccountClient(channel);
+            //return new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, httpClientHandler))
+            //    .ToAuthChannel(baseUri, token);
         }
     }
 }

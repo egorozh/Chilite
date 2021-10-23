@@ -46,7 +46,7 @@
     private string _message;
 
     private readonly CancellationTokenSource _cancelTokenSource = new ();
-
+    
     protected override async Task OnInitializedAsync()
     {
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;

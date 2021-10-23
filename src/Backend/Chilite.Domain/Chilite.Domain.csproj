@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Chilite.Database\Chilite.Database.csproj" />
+		<ProjectReference Include="..\Chilite.DomainModels\Chilite.DomainModels.csproj" />
+	</ItemGroup>
+
+</Project>
