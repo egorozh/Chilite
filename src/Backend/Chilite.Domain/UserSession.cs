@@ -4,16 +4,37 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Chilite.Domain;
 
-public class UserSession
+public class UserSession : IDisposable
 {
+    #region Private Fields
+
     private ChatApp _chatApp;
+
+    #endregion
+
+    #region Public Properties
+
+    public string UserId { get; }
+
+    #endregion
+
+    #region Events
 
     public event Action<ChatMessage>? NewMessageSended;
 
-    public UserSession(ChatApp chatApp, ChatUser user)
+    #endregion
+
+    #region Constructor
+
+    public UserSession(ChatApp chatApp, string userId)
     {
+        UserId = userId;
         _chatApp = chatApp;
     }
+
+    #endregion
+    
+    #region Public Methods
 
     public void Init()
     {
@@ -21,10 +42,8 @@ public class UserSession
 
         var chatDbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
 
-        foreach (var chatMessage in chatDbContext.Messages)
-        {
+        foreach (var chatMessage in chatDbContext.Messages) 
             NewMessageSended?.Invoke(chatMessage);
-        }
     }
 
     public void Dispose()
@@ -37,4 +56,6 @@ public class UserSession
     {
         NewMessageSended?.Invoke(chatMessage);
     }
+
+    #endregion
 }

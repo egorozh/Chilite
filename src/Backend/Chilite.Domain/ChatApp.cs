@@ -20,7 +20,7 @@ public class ChatApp
 
     public UserSession JoinUser(ChatUser user)
     {
-        var userSession = new UserSession(this, user);
+        var userSession = new UserSession(this, user.Id);
 
         Sessions.Add(userSession);
 

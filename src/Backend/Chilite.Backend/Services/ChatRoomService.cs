@@ -72,12 +72,7 @@ public class ChatRoomService : ChatRoom.ChatRoomBase
             _responseStream = null!;
         }
     }
-
-    private async void SessionOnNewMessageSended(DomainModels.ChatMessage message)
-    {
-        await _responseStream.WriteAsync(new ChatMessage {Message = message.Message});
-    }
-
+    
     public override async Task<ChatRequest> Send(ChatMessage request, ServerCallContext context)
     {
         var user = await _userManager.GetUserAsync(context.GetHttpContext().User);
@@ -91,6 +86,15 @@ public class ChatRoomService : ChatRoom.ChatRoomBase
         await _chatApp.SendAsync(user, chatMessage);
 
         return new ChatRequest();
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private async void SessionOnNewMessageSended(DomainModels.ChatMessage message)
+    {
+        await _responseStream.WriteAsync(new ChatMessage { Message = message.Message });
     }
 
     #endregion
