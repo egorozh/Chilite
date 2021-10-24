@@ -2,22 +2,25 @@
 using Chilite.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Chilite.Domain;
 
 public class ChatApp
 {
-    internal IServiceScopeFactory ServiceProvider;
-    internal List<UserSessions> Sessions = new();
+    internal IServiceScopeFactory ServiceScopeFactory;
+    internal ILogger<ChatApp> Logger;
+    internal List<UserSession> Sessions = new();
 
-    public ChatApp(IServiceScopeFactory scopeFactory)
+    public ChatApp(IServiceScopeFactory scopeFactory, ILogger<ChatApp> logger)
     {
-        ServiceProvider = scopeFactory;
+        ServiceScopeFactory = scopeFactory;
+        Logger = logger;
     }
 
-    public UserSessions JoinUser(ChatUser user)
+    public UserSession JoinUser(ChatUser user)
     {
-        var userSession = new UserSessions(this, user);
+        var userSession = new UserSession(this, user);
 
         Sessions.Add(userSession);
 
@@ -26,7 +29,7 @@ public class ChatApp
 
     public async Task SendAsync(ChatUser user, ChatMessage chatMessage)
     {
-        using var scope = ServiceProvider.CreateScope();
+        using var scope = ServiceScopeFactory.CreateScope();
 
         var chatDbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
 
@@ -46,26 +49,17 @@ public class ChatApp
         }
         catch (Exception ex)
         {
-            LogException(ex);
-        }
-        finally
-        {
-            var old = Console.BackgroundColor;
-            Console.BackgroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("finally");
-            Console.BackgroundColor = old;
+            LogException(ex, "SendAsync");
         }
     }
 
-    void LogException(Exception error)
+    private void LogException(Exception error, string message)
     {
-        Exception realerror = error;
+        var realerror = error;
+
         while (realerror.InnerException != null)
             realerror = realerror.InnerException;
 
-        var old = Console.BackgroundColor;
-        Console.BackgroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine(realerror.ToString());
-        Console.BackgroundColor = old;
+        Logger.LogError(error, $"ChatApp.{message}");
     }
 }
